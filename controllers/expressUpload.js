@@ -7,12 +7,16 @@ const Local = async (req, res) => {
 
    const productImage = req.files.image
    // const imageName = Date.now()
-   const imagePath = path.join(__dirname, '../public/uploads/' + `${productImage.name}`) 
+   const ext = path.extname(productImage.name)
+   const Name = 'photo'+'-'+ Date.now() +ext
+
+   // const imagePath = path.join(__dirname, '../public/uploads/' + `${productImage.name}`) 
+   const imagePath = path.join(__dirname, '../public/uploads/' + `${Name}`) 
    await productImage.mv(imagePath)
 
    const product =await Product.findOne({_id: req.params.id})
-   const url = `/uploads/${productImage.name}`
-
+   // const url = `/uploads/${productImage.name}`
+   const url = `/uploads/${Name}`
    product.image = url
    const result = await product.save()
 
