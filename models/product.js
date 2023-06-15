@@ -12,8 +12,7 @@ const productSchema = new mongoose.Schema({
       required: [true, 'Please provide price']
    },
    image: {
-      type: String,
-      required: [true, 'Please provide image']
+      type: String
    }
 }, { timestamps: true }
 )
