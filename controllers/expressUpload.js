@@ -3,10 +3,11 @@ const Product = require('../models/product')
 const path = require('path')
 
 const Local = async (req, res) => {
-   console.log(req.files);
+   console.log(req.files.image);
 
    const productImage = req.files.image
-   // const imageName = Date.now()
+   
+
    const ext = path.extname(productImage.name)
    const Name = 'photo'+'-'+ Date.now() +ext
 
@@ -21,6 +22,32 @@ const Local = async (req, res) => {
    const result = await product.save()
 
    return res.status(200).json({msg: 'Success', data: result})
+
+
+
+
+   // if (productImage.length) {
+   //    const array = []
+
+   //    for (i in productImage) {
+   //       const imagePath = path.join(__dirname, '../public/uploads/' + `${productImage[i].name}`)
+   //       await productImage[i].mv(imagePath)
+   //       array.push(`/uploads/${productImage[i].name}`)
+   //    }
+   //    console.log(array);
+
+   //    return res.status(200).json({ success: true, img: { src: array } })
+
+   // } else {
+   //    const imagePath = path.join(__dirname, '../public/uploads/' + `${productImage.name}`)
+
+   //    await productImage.mv(imagePath)
+
+   //    return res.status(200).json({ success: true, img: { src: `/uploads/${productImage.name}` } })
+
+   // }
+
+
 }
 
 

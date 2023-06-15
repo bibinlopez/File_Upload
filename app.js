@@ -12,15 +12,13 @@ const errorHandlerMiddleware = require('./middlewares/error-handler')
 
 const expressRoute = require('./routes/expressRoute')
 const productRoute = require('./routes/productRoute')
+const multerRouter = require('./routes/multerRoute')
 
 
 
 app.use(express.json())
 app.use(express.static('./public'))
-app.use(fileUpload())
-
-
-
+// app.use(fileUpload())
 
 
 
@@ -28,8 +26,11 @@ app.use(fileUpload())
 // app.get('/', (req, res) => {
 //    res.send('hi hello')
 // })
+
+
 app.use('/api/express', expressRoute)
 app.use('/api/product', productRoute)
+app.use('/api/multer', multerRouter)
 
 
 app.use(notFound)
