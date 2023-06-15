@@ -6,10 +6,17 @@ const express = require ('express')
 
 const connectDB = require('./db/connect')
 
+const notFound = require('./middlewares/notFound')
+const errorHandlerMiddleware = require('./middlewares/error-handler')
 
 
 
 
+
+
+
+express().use(notFound)
+express().use(errorHandlerMiddleware)
 
 
 const port = 3000;
