@@ -1,9 +1,8 @@
 const Product = require('../models/product')
 
 const createProduct = async (req, res) => {
-   console.log(req.body);
+   
    const product = new Product(req.body)
-
 
    const result = await product.save()
 
@@ -12,8 +11,8 @@ const createProduct = async (req, res) => {
 }
 
 const getAllProduct = async (req, res) => {
-   const result = await Product.find({})
-   return res.status(200).json({ result })
+   const product = await Product.find({})
+   return res.status(200).json({ data: product , count : product.length })
 }
 
 

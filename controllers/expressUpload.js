@@ -10,7 +10,13 @@ const Local = async (req, res) => {
    const imagePath = path.join(__dirname, '../public/uploads/' + `${productImage.name}`) 
    await productImage.mv(imagePath)
 
-   return res.status(200).json({msg: 'Success', image:{src: `/uploads/${productImage.name}` }})
+   const product =await Product.findOne({_id: req.params.id})
+   const url = `/uploads/${productImage.name}`
+
+   product.image = url
+   const result = await product.save()
+
+   return res.status(200).json({msg: 'Success', data: result})
 }
 
 
