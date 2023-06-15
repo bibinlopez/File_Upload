@@ -4,10 +4,12 @@ const express = require('express')
 const router = express.Router()
 
 
-const { Local } = require('../controllers/expressUpload')
+const { Local, expressCloud } = require('../controllers/expressUpload')
 
 
-router.post ('/:id', Local)
+
+router.post('/:id', Local)
+router.post('/cloud/:id', expressCloud)
 
 
 

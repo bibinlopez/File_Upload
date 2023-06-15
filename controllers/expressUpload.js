@@ -1,5 +1,5 @@
 const Product = require('../models/product')
-
+const cloudinary = require('cloudinary').v2
 const path = require('path')
 
 const Local = async (req, res) => {
@@ -50,7 +50,28 @@ const Local = async (req, res) => {
 
 }
 
+const expressCloud = async (req, res) => {
+   const productImage = req.files.image
+   // console.log(productImage);
+   const response = await cloudinary.uploader.upload(productImage.tempFilePath, {
+      use_filename: true,
+      folder: 'file-upload',
+   });
+   // console.log(response);
+
+   const product = await Product.findOne({ _id: req.params.id })
+   const url = response.secure_url
+   product.image = url
+   const result = await product.save()
+
+   return res.status(200).json({ msg: 'Success', data: result })
+
+
+}
+
+
 
 module.exports = {
-   Local
+   Local,
+   expressCloud
 }

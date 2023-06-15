@@ -7,6 +7,14 @@ const app = express()
 const connectDB = require('./db/connect')
 const fileUpload = require('express-fileupload')
 
+const cloudinary = require('cloudinary').v2
+cloudinary.config({
+   cloud_name: process.env.CLOUD_NAME,
+   api_key: process.env.CLOUD_API_KEY,
+   api_secret: process.env.CLOUD_API_SECRET
+})
+
+
 const notFound = require('./middlewares/notFound')
 const errorHandlerMiddleware = require('./middlewares/error-handler')
 
@@ -19,6 +27,7 @@ const multerRouter = require('./routes/multerRoute')
 app.use(express.json())
 app.use(express.static('./public'))
 // app.use(fileUpload())
+app.use(fileUpload({ useTempFiles: true }))
 
 
 
